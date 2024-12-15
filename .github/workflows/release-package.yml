@@ -1,0 +1,68 @@
+name: Release & Publish to NPM
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        type: choice
+        description: Version bump type
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+      release_type:
+        type: choice
+        description: Release type
+        options:
+          - beta
+          - rc
+          - stable
+        default: stable
+      dry_run:
+        type: boolean
+        description: Perform a dry run
+        default: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install the dependencies
+        run: yarn
+      - name: Initialise the NPM config
+        run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Initialize Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Run release
+        run: |
+          VERSION_BUMP="${{ github.event.inputs.version_bump }}"
+          RELEASE_TYPE="${{ github.event.inputs.release_type }}"
+          DRY_RUN="${{ github.event.inputs.dry_run }}"
+
+          if [ "$DRY_RUN" = "true" ]; then
+            DRY_RUN_FLAG="--dry-run"
+          else
+            DRY_RUN_FLAG=""
+          fi
+
+          if [ "$RELEASE_TYPE" = "stable" ]; then
+            yarn release $VERSION_BUMP --ci $DRY_RUN_FLAG
+          else
+            yarn release $VERSION_BUMP --ci $DRY_RUN_FLAG --preRelease=$RELEASE_TYPE
+          fi
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

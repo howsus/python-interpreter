@@ -1,0 +1,70 @@
+{
+  "name": "python-interpreter",
+  "description": "Python interpreter in NodeJS",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "README",
+    "./dist/**/*.map",
+    "./dist/**/*.d.ts",
+    "./dist/**/*.whl"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build": "tsc && tsx ./build.ts",
+    "postinstall": "husky",
+    "release": "release-it",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "lint-staged": {
+    "*.{js, jsx,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,js,ts,jsx,tsx,html}": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "dependencies": {
+    "@jupyterlite/pyodide-kernel": "^0.4.5",
+    "pyodide": "^0.26.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@release-it/conventional-changelog": "^9.0.3",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "pinst": "^3.0.0",
+    "prettier": "^3.4.2",
+    "pyodide": "^0.26.4",
+    "react": "^19.0.0",
+    "release-it": "^17.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "keywords": [
+    "python",
+    "python code interpreter",
+    "code interpreter"
+  ],
+  "packageManager": "yarn@4.5.3"
+}
