@@ -44,7 +44,8 @@
     "pyodide": "^0.26.4"
   },
   "dependencies": {
-    "@jupyterlite/pyodide-kernel": "^0.4.5"
+    "@jupyterlite/pyodide-kernel": "^0.4.5",
+    "comlink": "^4.4.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",

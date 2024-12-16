@@ -18,12 +18,12 @@ npm install python-interpreter pyodide
 Here's a basic example of how to use `python-interpreter`:
 
 ```javascript
-import { Interpreter } from "python-interpreter";
+import { Sandbox } from "python-interpreter";
 
 (async () => {
-  const interpreter = await Interpreter.create();
+  const sandbox = await Sandbox.create();
 
-  const execution = await interpreter.execute(`print("hello world")`);
+  const execution = await sandbox.execute(`print("hello world")`);
 
   console.log("Output:", execution);
 })();

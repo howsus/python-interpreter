@@ -6,9 +6,9 @@ import comm from "../pypi/comm-0.2.2-py3-none-any.whl";
 
 export const packages = [
   "micropip",
-  resolve(import.meta.dirname, comm),
-  resolve(import.meta.dirname, piplite),
-  resolve(import.meta.dirname, ipykernel),
-  resolve(import.meta.dirname, pyodidekernel),
+  resolve(__dirname, comm),
+  resolve(__dirname, piplite),
+  resolve(__dirname, ipykernel),
+  resolve(__dirname, pyodidekernel),
   "ipython",
 ];

@@ -1,10 +1,11 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/sandbox.worker.ts"],
   minify: false,
-  splitting: false,
+  splitting: true,
   sourcemap: true,
+  silent: true,
   format: ["cjs", "esm"],
   dts: true,
   clean: true,
