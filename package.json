@@ -1,19 +1,28 @@
 {
   "name": "python-interpreter",
   "description": "Python interpreter in NodeJS",
-  "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/howsus/python-interpreter.git"
+  },
   "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
   "files": [
-    "README",
-    "./dist/**/*.map",
-    "./dist/**/*.d.ts",
-    "./dist/**/*.whl"
+    "dist"
   ],
   "license": "MIT",
   "type": "module",
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "build": "tsc && tsx ./build.ts",
+    "build": "tsup",
     "postinstall": "husky",
     "release": "release-it",
     "prepack": "pinst --disable",
@@ -31,9 +40,11 @@
       "prettier --write --ignore-unknown"
     ]
   },
-  "dependencies": {
-    "@jupyterlite/pyodide-kernel": "^0.4.5",
+  "peerDependencies": {
     "pyodide": "^0.26.4"
+  },
+  "dependencies": {
+    "@jupyterlite/pyodide-kernel": "^0.4.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
@@ -43,7 +54,6 @@
     "@types/react": "^19",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
-    "esbuild": "^0.24.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -58,7 +68,7 @@
     "pyodide": "^0.26.4",
     "react": "^19.0.0",
     "release-it": "^17.10.0",
-    "tsx": "^4.19.2",
+    "tsup": "^8.3.5",
     "typescript": "5.5"
   },
   "keywords": [

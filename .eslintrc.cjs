@@ -22,7 +22,7 @@ module.exports = {
       },
     },
     {
-      files: ["build.ts"],
+      files: ["*.config.ts", "*.config.js"],
       rules: {
         "import/no-extraneous-dependencies": "off",
       },

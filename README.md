@@ -10,7 +10,7 @@ For production environments, consider using robust solutions like [Riza](https:/
 Install the library using npm:
 
 ```bash
-npm install python-interpreter
+npm install python-interpreter pyodide
 ```
 
 ## Usage
